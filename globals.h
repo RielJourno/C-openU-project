@@ -71,19 +71,19 @@ typedef enum opcodes {
 /** Commands funct */
 typedef enum funct {
 	/* OPCODE 2 */
-	ADD_FUNCT = 1,
-	SUB_FUNCT = 2,
+	ADD_FUNCT = 10,
+	SUB_FUNCT = 11,
 
 	/* OPCODE 5 */
-	CLR_FUNCT = 1,
-	NOT_FUNCT = 2,
-	INC_FUNCT = 3,
-	DEC_FUNCT = 4,
+	CLR_FUNCT = 10,
+	NOT_FUNCT = 11,
+	INC_FUNCT = 12,
+	DEC_FUNCT = 13,
 
 	/* OPCODE 9 */
-	JMP_FUNCT = 1,
-	BNE_FUNCT = 2,
-	JSR_FUNCT = 3,
+	JMP_FUNCT = 10,
+	BNE_FUNCT = 11,
+	JSR_FUNCT = 12,
 
 	/** Default (No need/Error) */
 	NONE_FUNCT = 0

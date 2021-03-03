@@ -23,7 +23,8 @@ int main(int argc, char *argv[]) {
 	/* Process each file by arguments */
 	for (i = 1; i < argc; ++i) {
 		/* if last process failed and there's another file, break line: */
-		if (!succeeded) puts("");
+		if (!succeeded) 
+			puts("");
 		/* foreach argument (file name), send it for full processing. */
 		succeeded = process_file(argv[i]);
 		/* Line break if failed */

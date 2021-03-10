@@ -133,7 +133,7 @@ addressing_type get_addressing_type(char *operand) {
 	/* if operand starts with # and a number right after that, it's immediately addressed */
 	else if (operand[0] == '#' && is_int(operand + 1)) return IMMEDIATE_ADDR;
 	/* if operand starts with & and has label afterwards, it;s realtively addressed */
-	else if (operand[0] && operand[0] == '&' && is_valid_label_name(operand + 1)) return RELATIVE_ADDR;
+	else if (operand[0] && operand[0] == '%' && is_valid_label_name(operand + 1)) return RELATIVE_ADDR;
 	/* if operand is a valid label name, it's directly addressed */
 	else if (is_valid_label_name(operand)) return DIRECT_ADDR;
 	else return NONE_ADDR;

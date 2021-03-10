@@ -135,8 +135,10 @@ int process_spass_operand(line_info line, long *curr_ic, long *ic, char *operand
 	addressing_type addr = get_addressing_type(operand);
 	machine_word *word_to_write;
 	/* if the word on *IC has the immediately addressed value (done in first pass), go to next cell (increase ic) */
-	if (addr == IMMEDIATE_ADDR) (*curr_ic)++;
-	if (addr == RELATIVE_ADDR) operand++;
+	if (addr == IMMEDIATE_ADDR) 
+		(*curr_ic)++;
+	if (addr == RELATIVE_ADDR) 
+		operand++;
 	if (DIRECT_ADDR == addr || RELATIVE_ADDR == addr) {
 		long data_to_add;
 		table_entry *entry = find_by_types(*symbol_table, operand, 3, DATA_SYMBOL, CODE_SYMBOL, EXTERNAL_SYMBOL);

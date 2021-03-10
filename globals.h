@@ -91,14 +91,14 @@ typedef enum funct {
 
 /** Registers - r0->r1 + not found */
 typedef enum registers {
-	R0 = 0,
-	R1,
-	R2,
-	R3,
-	R4,
-	R5,
-	R6,
-	R7,
+	R0 = 1,
+	R1 ,
+	R2 ,
+	R3 ,
+	R4 ,
+	R5 ,
+	R6 , 
+	R7 ,
 	NONE_REG = -1
 } reg;
 /** Represents a single code word */

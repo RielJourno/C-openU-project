@@ -103,16 +103,10 @@ typedef enum registers {
 } reg;
 /** Represents a single code word */
 typedef struct code_word {
-	/* First byte: ARE+funct */
-	unsigned int ARE: 3;
-	unsigned int funct: 5;
-	/* 2nd byte: destination+addressing, source */
-	unsigned int dest_register: 3;
 	unsigned int dest_addressing: 2;
-	unsigned int src_register: 3;
-	/* Third byte: source addressing, opcode */
 	unsigned int src_addressing: 2;
-	unsigned int opcode: 6;
+	unsigned int funct: 4;
+	unsigned int opcode: 4;
 
 } code_word;
 

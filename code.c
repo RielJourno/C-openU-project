@@ -209,10 +209,8 @@ code_word *get_code_word(line_info line, opcode curr_opcode, funct curr_funct, i
 
 	codeword->opcode = curr_opcode;
 	codeword->funct = curr_funct; /* if no funct, curr_funct = NONE_FUNCT = 0, and it should be the default. */
-	codeword->ARE = ((1 << 2) &
-	                 0xFF); /* A is the only one which is 1 when it's an operation. we treat ARE as a single unit so j */
 	/* Default values of register bits are 0 */
-	codeword->dest_addressing = codeword->dest_register = codeword->src_addressing = codeword->src_register = 0;
+	codeword->dest_addressing =  codeword->src_addressing = 0;
 	/* Check if need to set the registers bits */
 	if (curr_opcode >= MOV_OP && curr_opcode <= LEA_OP) { /* First Group, two operands */
 		codeword->src_addressing = first_addressing;

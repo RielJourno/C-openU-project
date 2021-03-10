@@ -215,18 +215,9 @@ code_word *get_code_word(line_info line, opcode curr_opcode, funct curr_funct, i
 	if (curr_opcode >= MOV_OP && curr_opcode <= LEA_OP) { /* First Group, two operands */
 		codeword->src_addressing = first_addressing;
 		codeword->dest_addressing = second_addressing;
-		/* if it's register, set it's name in the proper locations */
-		if (first_addressing == REGISTER_ADDR) {
-			codeword->src_register = get_register_by_name(operands[0]);
-		}
-		if (second_addressing == REGISTER_ADDR) {
-			codeword->dest_register = get_register_by_name(operands[1]);
-		}
-	} else if (curr_opcode >= CLR_OP && curr_opcode <= PRN_OP) {
+	} 
+	else if (curr_opcode >= CLR_OP && curr_opcode <= PRN_OP) {
 		codeword->dest_addressing = first_addressing;
-		if (first_addressing == REGISTER_ADDR) {
-			codeword->dest_register = get_register_by_name(operands[0]);
-		}
 	}
 	return codeword;
 }

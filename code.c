@@ -291,7 +291,7 @@ data_word *build_data_word(addressing_type addressing, long data, bool is_extern
 	/* Now all left is to encode the data */
 	mask = -1;
 	mask_un = mask; /* both hold 11...11 */
-	mask_un >>= 11; /* Now mask_un holds 0..001111....111, 11 zeros and 21 ones */
-	dataword->data = mask_un & data; /* Now just the 21 lsb bits area left and assigned to data field. */
+	mask_un >>= 20; /* Now mask_un holds 0..001111....111, 20 zeros and 12 ones */
+	dataword->data = mask_un & data; /* Now just the 12 lsb bits area left and assigned to data field. */
 	return dataword;
 }

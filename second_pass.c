@@ -46,7 +46,7 @@ bool process_line_spass(line_info line, long *ic, machine_word **code_img, table
 			if (find_by_types(*symbol_table, token, 1, ENTRY_SYMBOL) == NULL) {
 				table_entry *entry;
 				token = strtok(line.content + i, "\n"); /*get name of label*/
-				if (token[0] == '&') token++;
+				if (token[0] == '%') token++;
 				/* if symbol is not defined as data/code */
 				if ((entry = find_by_types(*symbol_table, token, 2, DATA_SYMBOL, CODE_SYMBOL)) == NULL) {
 					/* if defined as external print error */

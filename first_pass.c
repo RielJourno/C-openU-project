@@ -232,7 +232,6 @@ static void build_extra_codeword_fpass(machine_word **code_img, long *ic, char *
 			code_img[(*ic) - IC_INIT_VALUE] = word_to_write;
 		}
 		else if (operand_addressing == REGISTER_ADDR) {
-			int i;
 			char *ptr;
 
 			machine_word *word_to_write;

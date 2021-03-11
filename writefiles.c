@@ -105,9 +105,9 @@ static bool write_table_to_file(table tab, char *filename, char *file_extension)
 	if (tab == NULL) return TRUE;
 
 	/* Write first line without \n to avoid extraneous line breaks */
-	fprintf(file_desc, "%s %.7ld", tab->key, tab->value);
+	fprintf(file_desc, "%s %.4ld", tab->key, tab->value);
 	while ((tab = tab->next) != NULL) {
-		fprintf(file_desc, "\n%s %.7ld", tab->key, tab->value);
+		fprintf(file_desc, "\n%s %.4ld", tab->key, tab->value);
 	}
 	fclose(file_desc);
 	return TRUE;

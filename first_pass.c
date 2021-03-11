@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h> 
 #include "globals.h"
 #include "code.h"
 #include "utils.h"
@@ -236,7 +237,7 @@ static void build_extra_codeword_fpass(machine_word **code_img, long *ic, char *
 			char *ptr;
 			machine_word *word_to_write;
 			/* Get value of immediate addressed operand. notice that it starts with #, so we're skipping the # in the call to strtol */
-			long value = strtol(2^(get_register_by_name(operand + 1)), &ptr, 10);
+			long value = strtol(pow(2,(get_register_by_name(operand + 1))), &ptr, 10);
 			word_to_write->ARE='A';
 			word_to_write = (machine_word *) malloc_with_check(sizeof(machine_word));
 			word_to_write->length = 0; /* Not Code word! */

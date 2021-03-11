@@ -69,7 +69,7 @@ static bool write_ob(machine_word **code_img, long *data_img, long icf, long dcf
 			val = (KEEP_ONLY_12_LSB(code_img[i]->word.data->data));
 		}
 		/* Write the value to the file - first */
-		fprintf(file_desc, "\n%.4d %.3lX %c", i + 100, val, code_img->ARE);
+		fprintf(file_desc, "\n%.4d %.3lX %c", i + 100, val, code_img[i]->ARE);
 	}
 
 	/* Write data image. dcf starts at 0 so it's fine */
@@ -77,7 +77,7 @@ static bool write_ob(machine_word **code_img, long *data_img, long icf, long dcf
 		/* print only lower 24 bytes */
 		val = KEEP_ONLY_12_LSB(data_img[i]);
 		/* print at least 6 digits of hex, and 7 digits of dc */
-		fprintf(file_desc, "\n%.4ld %.3lX %c", icf + i, val, code_img->ARE);
+		fprintf(file_desc, "\n%.4ld %.3lX %c", icf + i, val, code_img[i]->ARE);
 	}
 
 	/* Close the file */

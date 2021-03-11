@@ -128,6 +128,7 @@ int printf_line_error(line_info line, char *message, ...) { /* Prints the errors
 	return result;
 }
 
+
 void free_code_image(machine_word **code_image, long fic) {
 	long i;
 	/* for each not-null cell (we might have some "holes", so we won't stop on first null) */

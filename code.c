@@ -280,13 +280,8 @@ reg get_register_by_name(char *name) {
 
 data_word *build_data_word(addressing_type addressing, long data, bool is_extern_symbol) {
 	signed long mask; /* For bitwise operations for data conversion */
-	unsigned long ARE = 4, mask_un; /* 4 = 2^2 = 1 << 2 */
+	unsigned long mask_un;
 	data_word *dataword = malloc_with_check(sizeof(data_word));
-
-	if (addressing == DIRECT_ADDR) {
-		ARE = is_extern_symbol ? 1 : 2;
-	}
-	dataword->ARE = ARE; /* Set ARE field value */
 
 	/* Now all left is to encode the data */
 	mask = -1;

@@ -5,11 +5,6 @@
 #include "table.h"
 
 #define KEEP_ONLY_12_LSB(value) ((value) & 0xFFF)
-/**
- * "Cuts" the msb of the value, keeping only it's lowest 21 bits
- * 0b00000000000111111111111111111111 = 0x1FFFFF
- */
-#define KEEP_ONLY_21_LSB(value) ((value) & 0x1FFFFF)
 
 /**
  * Writes the code and data image into an .ob file, with lengths on top

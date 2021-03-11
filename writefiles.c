@@ -71,7 +71,7 @@ static bool write_ob(machine_word **code_img, long *data_img, long icf, long dcf
 			      (code_img[i]->word.code->src_addressing << 2) | (code_img[i]->word.code->dest_addressing);
 		} else {
 			/* We need to cut the value, keeping only it's 21 lsb, and include the ARE in the whole party as well: */
-			val = (KEEP_ONLY_12_LSB(code_img[i]->word.data->data) << 3) | (code_img[i]->word.data->ARE);
+			val = (KEEP_ONLY_12_LSB(code_img[i]->word.data->data));
 		}
 		/* Write the value to the file - first */
 		fprintf(file_desc, "\n%.4d %.3lX", i + 100, val);

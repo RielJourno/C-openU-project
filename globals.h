@@ -112,7 +112,6 @@ typedef struct code_word {
 
 /** Represents a single data word. */
 typedef struct data_word {
-	unsigned int ARE: 3;
 	/* The data content itself (a method for putting data into these field is defined) */
 	unsigned long data;
 } data_word;

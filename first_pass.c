@@ -226,8 +226,8 @@ static void build_extra_codeword_fpass(machine_word **code_img, long *ic, char *
 			machine_word *word_to_write;
 			/* Get value of immediate addressed operand. notice that it starts with #, so we're skipping the # in the call to strtol */
 			long value = strtol(operand + 1, &ptr, 10);
-			word_to_write->ARE='A';
 			word_to_write = (machine_word *) malloc_with_check(sizeof(machine_word));
+			word_to_write->ARE='A';
 			word_to_write->length = 0; /* Not Code word! */
 			(word_to_write->word).data = build_data_word(IMMEDIATE_ADDR, value, FALSE);
 			code_img[(*ic) - IC_INIT_VALUE] = word_to_write;
@@ -237,11 +237,12 @@ static void build_extra_codeword_fpass(machine_word **code_img, long *ic, char *
 			char *ptr;
 			int i;
 			machine_word *word_to_write;
+			long value;
 			/* Get value of immediate addressed operand. notice that it starts with #, so we're skipping the # in the call to strtol */
 			i = strtol(operand + 1, &ptr, 10);
 			value = 1<<i;
-			word_to_write->ARE='A';
 			word_to_write = (machine_word *) malloc_with_check(sizeof(machine_word));
+			word_to_write->ARE='A';
 			word_to_write->length = 0; /* Not Code word! */
 			(word_to_write->word).data = build_data_word(REGISTER_ADDR, value, FALSE);
 			code_img[(*ic) - IC_INIT_VALUE] = word_to_write;

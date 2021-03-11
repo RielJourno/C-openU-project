@@ -234,9 +234,12 @@ static void build_extra_codeword_fpass(machine_word **code_img, long *ic, char *
 		}
 		
 		else if (operand_addressing == REGISTER_ADDR) {
+			char *ptr;
+			int i;
 			machine_word *word_to_write;
 			/* Get value of immediate addressed operand. notice that it starts with #, so we're skipping the # in the call to strtol */
-			long value = 1<<get_register_by_name(operand + 1);
+			i = strtol(operand + 1, &ptr, 10);
+			value = 1<<i;
 			word_to_write->ARE='A';
 			word_to_write = (machine_word *) malloc_with_check(sizeof(machine_word));
 			word_to_write->length = 0; /* Not Code word! */

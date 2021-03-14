@@ -195,9 +195,9 @@ static bool process_code(line_info line, int i, long *ic, machine_word **code_im
 	/* allocate memory for a new word in the code image, and put the code word into it */
 	word_to_write = (machine_word *) malloc_with_check(sizeof(machine_word));
 	(word_to_write->word).code = codeword;
-	code_img[(*ic) -
-	         IC_INIT_VALUE] = word_to_write; /* Avoid "spending" cells of the array, by starting from initial value of ic */
-
+	word_to_write->ARE = 'A';
+	code_img[(*ic) - IC_INIT_VALUE] = word_to_write; 
+	/* Avoid "spending" cells of the array, by starting from initial value of ic */
 	/* Build extra information code word if possible, free pointers with no need */
 	if (operand_count--) { /* If there's 1 operand at least */
 		build_extra_codeword_fpass(code_img, ic, operands[0]);
@@ -208,7 +208,7 @@ static bool process_code(line_info line, int i, long *ic, machine_word **code_im
 		}
 	}
 
-	(*ic)++; /* increase ic to point the next cell */
+	(*ic)++;  /*increase ic to point the next cell */
 
 	/* Add the final length (of code word + data words) to the code word struct: */
 	code_img[ic_before - IC_INIT_VALUE]->length = (*ic) - ic_before;
@@ -216,12 +216,15 @@ static bool process_code(line_info line, int i, long *ic, machine_word **code_im
 	return TRUE; /* No errors */
 }
 
-static void build_extra_codeword_fpass(machine_word **code_img, long *ic, char *operand) {
+static void build_extra_codeword_fpass(machine_word **code_img, long *ic, char *operand) 
+{
 	addressing_type operand_addressing = get_addressing_type(operand);
 	/* And again - if another data word is required, increase CI. if it's an immediate addressing, encode it. */
-	if (operand_addressing != NONE_ADDR) {
+	if (operand_addressing != NONE_ADDR) 
+	{
 		(*ic)++;
-		if (operand_addressing == IMMEDIATE_ADDR) {
+		if (operand_addressing == IMMEDIATE_ADDR) 
+		{
 			char *ptr;
 			machine_word *word_to_write;
 			/* Get value of immediate addressed operand. notice that it starts with #, so we're skipping the # in the call to strtol */
@@ -232,21 +235,18 @@ static void build_extra_codeword_fpass(machine_word **code_img, long *ic, char *
 			(word_to_write->word).data = build_data_word(IMMEDIATE_ADDR, value, FALSE);
 			code_img[(*ic) - IC_INIT_VALUE] = word_to_write;
 		}
-		
-		else if (operand_addressing == REGISTER_ADDR) {
+		else if (operand_addressing == REGISTER_ADDR)
+		{
 			char *ptr;
-			int i;
 			machine_word *word_to_write;
-			long value;
 			/* Get value of immediate addressed operand. notice that it starts with #, so we're skipping the # in the call to strtol */
-			i = strtol(operand + 1, &ptr, 10);
-			value = 1<<i;
+			long value = strtol(operand + 1, &ptr, 10);
 			word_to_write = (machine_word *) malloc_with_check(sizeof(machine_word));
 			word_to_write->ARE='A';
 			word_to_write->length = 0; /* Not Code word! */
 			(word_to_write->word).data = build_data_word(REGISTER_ADDR, value, FALSE);
 			code_img[(*ic) - IC_INIT_VALUE] = word_to_write;
 		}
-		
 	}
+		
 }

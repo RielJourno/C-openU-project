@@ -135,7 +135,9 @@ int process_spass_operand(line_info line, long *curr_ic, long *ic, char *operand
 	addressing_type addr = get_addressing_type(operand);
 	machine_word *word_to_write;
 	/* if the word on *IC has the immediately addressed value (done in first pass), go to next cell (increase ic) */
-	if (addr == IMMEDIATE_ADDR) 
+	if (addr == IMMEDIATE_ADDR)
+		(*curr_ic)++;
+	if (addr == REGISTER_ADDR) 
 		(*curr_ic)++;
 	if (addr == RELATIVE_ADDR) 
 		operand++;
@@ -156,7 +158,7 @@ int process_spass_operand(line_info line, long *curr_ic, long *ic, char *operand
 				                  operand);
 				return FALSE;
 			}
-			data_to_add = data_to_add - *ic;
+			data_to_add = data_to_add - *ic-1;
 		}
 		/* Add to externals reference table if it's an external. increase ic because it's the next data word */
 		if (entry->type == EXTERNAL_SYMBOL) {
@@ -166,6 +168,13 @@ int process_spass_operand(line_info line, long *curr_ic, long *ic, char *operand
 		/*found symbol*/
 		word_to_write = (machine_word *) malloc_with_check(sizeof(machine_word));
 		word_to_write->length = 0;
+		/*A, R, E*/
+		if(entry->type == EXTERNAL_SYMBOL)
+			word_to_write->ARE = 'E';
+		else if(addr == RELATIVE_ADDR)
+			word_to_write->ARE ='A';
+		else
+			word_to_write->ARE = 'R';
 		word_to_write->word.data = build_data_word(addr, data_to_add, entry->type == EXTERNAL_SYMBOL);
 		code_img[(++(*curr_ic)) - IC_INIT_VALUE] = word_to_write;
 

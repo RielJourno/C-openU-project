@@ -35,9 +35,9 @@ bool find_label(line_info line, char *symbol_dest);
 instruction find_instruction_by_name(char *name);
 
 /**
- * Returns whether the string is a valid 21-bit integer
+ * Returns whether the string is a valid integer
  * @param string The number string
- * @return Whether a valid 21-bit signed integer.
+ * @return Whether a valid signed integer.
  */
 bool is_int(char* string);
 

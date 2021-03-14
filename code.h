@@ -45,6 +45,8 @@ reg get_register_by_name(char *name);
  */
 data_word *build_data_word(addressing_type addressing, long data, bool is_extern_symbol);
 
+data_word *build_data_word_reg(addressing_type addressing, long data, bool is_extern_symbol);
+
 /**
  * Separates the operands from a certain index, puts each operand into the destination array,
  * and puts the found operand count in operand count argument

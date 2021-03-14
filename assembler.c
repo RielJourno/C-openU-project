@@ -14,7 +14,7 @@
 static bool process_file(char *filename);
 
 /**
- * Entry point - 24bit assembler. Assembly language specified in booklet.
+ * Entry point - 12 bit assembler. Assembly language specified in booklet.
  */
 int main(int argc, char *argv[]) {
 	int i=1;

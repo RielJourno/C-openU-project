@@ -120,7 +120,7 @@ typedef struct data_word {
 typedef struct machine_word {
 	/* if it represents code (not additional data), this field contains the total length required by the code. if it's data, this field is 0. */
 	short length;
-	unsigned char ARE;
+	char ARE;
 	/* The content can be code or data */
 	union word {
 		data_word *data;

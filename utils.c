@@ -8,6 +8,7 @@
 
 #define ERR_OUTPUT_FILE stderr
 
+/*Concatenates both string to a new allocated memory*/
 char *strallocat(char *s0, char* s1) {
 	char *str = (char *)malloc_with_check(strlen(s0) + strlen(s1) + 1);
 	strcpy(str, s0);
@@ -59,6 +60,7 @@ static struct instruction_lookup_item
 		{NULL, NONE_INST}
 };
 
+/*Returns the instruction enum by the instruction's name, without the opening '.'*/
 instruction find_instruction_by_name(char *name) {
 	struct instruction_lookup_item *curr_item;
 	for (curr_item = instructions_lookup_table; curr_item->name != NULL; curr_item++) {
@@ -69,6 +71,7 @@ instruction find_instruction_by_name(char *name) {
 	return NONE_INST;
 }
 
+/*Returns whether the string is a valid integer*/
 bool is_int(char *string) {
 	int i = 0;
 	if (string[0] == '-' || string[0] == '+') string++; /* if string starts with +/-, it's OK */
@@ -80,6 +83,7 @@ bool is_int(char *string) {
 	return i > 0; /* if i==0 then it was an empty string! */
 }
 
+/*Allocates memory in the required size. Exits the program if failed.*/
 void *malloc_with_check(long size) {
 	void *ptr = malloc(size);
 	if (ptr == NULL) {
@@ -89,12 +93,14 @@ void *malloc_with_check(long size) {
 	return ptr;
 }
 
+/*Returns whether a label can be defined with the specified name.*/
 bool is_valid_label_name(char *name) {
 	/* Check length, first char is alpha and all the others are alphanumeric, and not saved word */
 	return name[0] && strlen(name) <= 31 && isalpha(name[0]) && is_alphanumeric_str(name + 1) &&
 	       !is_reserved_word(name);
 }
 
+/*Returns whether a string is alphanumeric.*/
 bool is_alphanumeric_str(char *string) {
 	int i;
 	/*check for every char in string if it is non alphanumeric char if it is function returns true*/
@@ -104,6 +110,7 @@ bool is_alphanumeric_str(char *string) {
 	return TRUE;
 }
 
+/*Returns TRUE if name is saved word*/
 bool is_reserved_word(char *name) {
 	int fun, opc;
 	/* check if register or command */
@@ -113,6 +120,8 @@ bool is_reserved_word(char *name) {
 	return FALSE;
 }
 
+ /* Prints a detailed error message, including file name and line number by the specified message,
+    formatted as specified in App. B of "The C Programming language" for printf.*/
 int printf_line_error(line_info line, char *message, ...) { /* Prints the errors into a file, defined above as macro */
 	int result;
 	va_list args; /* for formatting */
@@ -128,7 +137,7 @@ int printf_line_error(line_info line, char *message, ...) { /* Prints the errors
 	return result;
 }
 
-
+/*Frees all the dynamically-allocated memory for the code image.*/
 void free_code_image(machine_word **code_image, long fic) {
 	long i;
 	/* for each not-null cell (we might have some "holes", so we won't stop on first null) */

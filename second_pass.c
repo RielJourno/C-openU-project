@@ -168,7 +168,7 @@ int process_spass_operand(line_info line, long *curr_ic, long *ic, char *operand
 		/*found symbol*/
 		word_to_write = (machine_word *) malloc_with_check(sizeof(machine_word));
 		word_to_write->length = 0;
-		/*A, R, E*/
+		/*second pass A, R, E*/
 		if(entry->type == EXTERNAL_SYMBOL)
 			word_to_write->ARE = 'E';
 		else if(addr == RELATIVE_ADDR)

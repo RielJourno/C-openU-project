@@ -17,7 +17,7 @@ static bool process_file(char *filename);
  * Entry point - 24bit assembler. Assembly language specified in booklet.
  */
 int main(int argc, char *argv[]) {
-	int i;
+	int i=1;
 	/* To break line if needed */
 	bool succeeded = TRUE;
 	/* Process each file by arguments */

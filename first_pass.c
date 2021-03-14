@@ -57,7 +57,6 @@ bool process_line_fpass(line_info line, long *IC, long *DC, machine_word **code_
 		printf_line_error(line, "Illegal label name: %s", symbol);
 		return FALSE;
 	}
-	/* try using strtok instead... */
 	if (symbol[0] != '\0') {
 		for (; line.content[i] != ':'; i++); /* if symbol detected, start analyzing from it's deceleration end */
 		i++;
@@ -195,7 +194,7 @@ static bool process_code(line_info line, int i, long *ic, machine_word **code_im
 	/* allocate memory for a new word in the code image, and put the code word into it */
 	word_to_write = (machine_word *) malloc_with_check(sizeof(machine_word));
 	(word_to_write->word).code = codeword;
-	word_to_write->ARE = 'A';
+	word_to_write->ARE = 'A';/*set code word ARE*/
 	code_img[(*ic) - IC_INIT_VALUE] = word_to_write; 
 	/* Avoid "spending" cells of the array, by starting from initial value of ic */
 	/* Build extra information code word if possible, free pointers with no need */
@@ -219,7 +218,7 @@ static bool process_code(line_info line, int i, long *ic, machine_word **code_im
 static void build_extra_codeword_fpass(machine_word **code_img, long *ic, char *operand) 
 {
 	addressing_type operand_addressing = get_addressing_type(operand);
-	/* And again - if another data word is required, increase CI. if it's an immediate addressing, encode it. */
+	/* And again - if another data word is required, increase IC. if it's an immediate addressing, encode it. */
 	if (operand_addressing != NONE_ADDR) 
 	{
 		(*ic)++;
@@ -229,14 +228,14 @@ static void build_extra_codeword_fpass(machine_word **code_img, long *ic, char *
 			/* Get value of immediate addressed operand. notice that it starts with #, so we're skipping the # in the call to strtol */
 			long value = strtol(operand + 1, &ptr, 10);
 			word_to_write = (machine_word *) malloc_with_check(sizeof(machine_word));
-			word_to_write->ARE='A';
+			word_to_write->ARE='A';/*set register or immediate operand ARE*/
 			word_to_write->length = 0; /* Not Code word! */
 			if(operand_addressing == REGISTER_ADDR){
-			(word_to_write->word).data = build_data_word(REGISTER_ADDR, value, FALSE);
+			(word_to_write->word).data = build_data_word(REGISTER_ADDR, value, FALSE);/*build register words*/
 			code_img[(*ic) - IC_INIT_VALUE] = word_to_write;
 			}
 			else{
-			(word_to_write->word).data = build_data_word(IMMEDIATE_ADDR, value, FALSE);
+			(word_to_write->word).data = build_data_word(IMMEDIATE_ADDR, value, FALSE);/*build immediate words*/
 			code_img[(*ic) - IC_INIT_VALUE] = word_to_write;
 			}
 		}

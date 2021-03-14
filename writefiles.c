@@ -32,9 +32,10 @@ int write_output_files(machine_word **code_img, long *data_img, long icf, long d
 	table externals = filter_table_by_type(symbol_table, EXTERNAL_REFERENCE);
 	table entries = filter_table_by_type(symbol_table, ENTRY_SYMBOL);
 	/* Write .ob file */
-	result = write_ob(code_img, data_img, icf, dcf, filename) &&
+	result = write_ob(code_img, data_img, icf, dcf, filename)&&
+
 	         /* Write *.ent and *.ext files: call with symbols from external references type or entry type only */
-	         write_table_to_file(externals, filename, ".ext") &&
+	         write_table_to_file(externals, filename, ".ext")&&
 	         write_table_to_file(entries, filename, ".ent");
 	/* Release filtered tables */
 	free_table(externals);
@@ -55,7 +56,6 @@ static bool write_ob(machine_word **code_img, long *data_img, long icf, long dcf
 		printf("Can't create or rewrite to file %s.", output_filename);
 		return FALSE;
 	}
-
 	/* print data/code word count on top */
 	fprintf(file_desc, "%ld %ld", icf - IC_INIT_VALUE, dcf);
 
@@ -63,11 +63,13 @@ static bool write_ob(machine_word **code_img, long *data_img, long icf, long dcf
 	for (i = 0; i < icf - IC_INIT_VALUE; i++) {
 		if (code_img[i]->length > 0) {
 			val = (code_img[i]->word.code->opcode << 8) | (code_img[i]->word.code->funct) << 4 | 
-			      (code_img[i]->word.code->src_addressing << 2) | (code_img[i]->word.code->dest_addressing);
+			      (code_img[i]->word.code->src_addressing << 2) | (code_img[i]->word.code->dest_addressing); 
+
 		} else {
-			/* We need to cut the value, keeping only it's 21 lsb, and include the ARE in the whole party as well: */
-			val = (KEEP_ONLY_12_LSB(code_img[i]->word.data->data));
-		}
+			/*We need to cut the value, keeping only it's 21 lsb, and include the ARE in the whole party as well: */
+			val = (code_img[i]->word.data->data);
+
+		} 
 		/* Write the value to the file - first */
 		fprintf(file_desc, "\n%.4d %.3lX %c", i + 100, val, code_img[i]->ARE);
 	}
@@ -77,7 +79,7 @@ static bool write_ob(machine_word **code_img, long *data_img, long icf, long dcf
 		/* print only lower 24 bytes */
 		val = KEEP_ONLY_12_LSB(data_img[i]);
 		/* print at least 6 digits of hex, and 7 digits of dc */
-		fprintf(file_desc, "\n%.4ld %.3lX %c", icf + i, val, code_img[i]->ARE);
+		fprintf(file_desc, "\n%.4ld %.3lX %c", icf + i, val, 'A');
 	}
 
 	/* Close the file */

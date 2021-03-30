@@ -2,7 +2,7 @@
 
 This project is an assignment in a C programming course at the open unvieristy (20465). The purpose of this project is to build an assembler for 15-instruction asssembly language, for an imaginary 12-bit CPU. This project was done by @RielJourno and @BenChoen. For any issues, questions and ideas turn to the Issues tab.
 
-License: MIT License, Affect from September 1st, 2021
+License: MIT License.
 
 Directory structure (Modules)
 assembler - main function definition, argv & argc processing, single file processing.

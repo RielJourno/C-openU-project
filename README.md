@@ -5,7 +5,7 @@ This project is an assignment in a C programming course at the open unvieristy (
 License: MIT License.
 
 Directory structure (Modules)
-assembler - main function definition, argv & argc processing, single file processing.
+׳assembler׳ - main function definition, argv & argc processing, single file processing.
 first_pass - contains functions for processing a single line in the first pass and a code line in the first pass.
 second_pass - contains function for processing a single line in second pass and replacing symbol by it's address.
 code - contains useful function for processing code.

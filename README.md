@@ -1,6 +1,6 @@
 # C-openU-project
 
-This project is an assignment in a C programming course at the open unvieristy (20465). The purpose of this project is to build an assembler for 15-instruction asssembly language, for an imaginary 12-bit CPU. This project was done by [@RielJourno](https://github.com/RielJourno/) and [@BenChoen]. For any issues, questions and ideas turn to the Issues tab.
+This project is an assignment in a C programming course at the open unvieristy (20465). The purpose of this project is to build an assembler for 15-instruction asssembly language, for an imaginary 12-bit CPU. This project was done by [@RielJourno](https://github.com/RielJourno/) and [@BenChoen](https://github.com/bencohen694/). For any issues, questions and ideas turn to the Issues tab.
 
 ## License: MIT License.
 
